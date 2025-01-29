@@ -1,4 +1,4 @@
-import uiautomator import Device
+import uiautomator
 import subprocess
 import time
 carreraTomada=False
