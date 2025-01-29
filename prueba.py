@@ -9,7 +9,7 @@ print(d.info)
 
 # Coordenadas del clic
 x, y = 500, 600
-time.sleep(2)
+time.sleep(5)
 
 # Simula clics
 for i in range(4):
