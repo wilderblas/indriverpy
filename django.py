@@ -36,7 +36,7 @@ subprocess.run(["termux-wake-lock"])
 
 while not carreraTomada:
   device=uiautomator.Device()
-  subprocess.run(["adb", "shell","input tab 540 460"])
+  subprocess.run(["adb", "shell","input tap 540 460"])
   print("Se hizo click")
   time.sleep(1)
 #buscar_texto_y_click("metro")
