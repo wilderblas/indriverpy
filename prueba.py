@@ -1,23 +1,18 @@
-from uiautomator import Device
+import uiautomator2 as u2
 import time
 
 # Conectar con el dispositivo (asegúrate de que tu dispositivo esté conectado y en modo depuración)
-d = Device()
+d = u2.connect()
 
-# Coordenadas donde quieres hacer clic
-x = 500
-y = 600
-time.sleep(5)
-# Simular el clic en las coordenadas (x, y)
-d.click(x, y)
-print(f"Clic simulado en las coordenadas ({x}, {y})")
-time.sleep(0.5)
-d.click(x, y)
-print(f"Clic simulado en las coordenadas ({x}, {y})")
-time.sleep(0.5)
-d.click(x, y)
-print(f"Clic simulado en las coordenadas ({x}, {y})")
-time.sleep(0.5)
-d.click(x, y)
-print(f"Clic simulado en las coordenadas ({x}, {y})")
-time.sleep(0.5)
+# Verifica que la conexión funciona
+print(d.info)
+
+# Coordenadas del clic
+x, y = 500, 600
+time.sleep(2)
+
+# Simula clics
+for i in range(4):
+    d.click(x, y)
+    print(f"Clic simulado en ({x}, {y}) - intento {i+1}")
+    time.sleep(0.5)
