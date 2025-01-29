@@ -1,4 +1,4 @@
-import uiautomator
+import uiautomator import Device
 import subprocess
 import time
 carreraTomada=False
@@ -39,7 +39,8 @@ while not carreraTomada:
   elements = device(text="metro")
 
   if elements.exists:
-    subprocess.run(["adb", "shell","input tap 540 460"])
+    #subprocess.run(["adb", "shell","input tap 540 460"])
+    device.click(500,500)
     print("Se hizo click")
   time.sleep(1)
 #buscar_texto_y_click("metro")
