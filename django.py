@@ -1,15 +1,12 @@
 import uiautomator
 import subprocess
 import time
-carreraTomada=False
+
+carreraTomada = False
 
 def buscar_texto_y_click(texto_buscar):
     # Conectar al dispositivo usando ADB
     device = uiautomator.Device()
-
-    # Definir las coordenadas de la parte de la pantalla donde se buscará el texto
-    # Puedes ajustar las coordenadas según lo que necesites (ej: x1, y1 a x2, y2)
-    x1, y1, x2, y2 = 0, 0, 1080, 1920  # Ajusta las coordenadas según la zona de búsqueda
 
     # Buscar el texto en la pantalla
     elements = device(text=texto_buscar)
@@ -34,13 +31,16 @@ def buscar_texto_y_click(texto_buscar):
 # Llamar la función con el texto que deseas buscar y hacer click
 subprocess.run(["termux-wake-lock"])
 
-while not carreraTomada:
-  device=uiautomator.Device()
-  elements = device(text="metro")
+device = uiautomator.Device()  # Crear la instancia una vez fuera del bucle
 
-  if elements.exists:
-    #subprocess.run(["adb", "shell","input tap 540 460"])
-    device.click(500,500)
-    print("Se hizo click")
-  time.sleep(1)
-#buscar_texto_y_click("metro")
+while not carreraTomada:
+    try:
+        elements = device(text="metro")
+        if elements.exists:
+          subprocess.run(["adb", "shell", "input tap 540 460"])
+          print("Se hizo click")
+        time.sleep(1)
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
+        break
+
