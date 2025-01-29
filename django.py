@@ -24,7 +24,7 @@ def buscar_texto_y_click(texto_buscar):
             click_y = (bounds['top'] + bounds['bottom']) / 2
 
             # Ejecutar el comando ADB para hacer click usando las coordenadas
-            subprocess.run(["adb", "shell", f"input tab {int(click_x)} {int(click_y)}"])
+            subprocess.run(["adb", "shell", f"input tap {int(click_x)} {int(click_y)}"])
 
             print(f"Hicimos click en las coordenadas ({int(click_x)}, {int(click_y)})")
             return
