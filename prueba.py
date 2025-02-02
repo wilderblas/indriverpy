@@ -43,5 +43,7 @@ time.sleep(5) """
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         break """
+
+time.sleep(7)
 d = u2.connect()
 print(d.dump_hierarchy())
