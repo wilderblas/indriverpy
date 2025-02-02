@@ -45,7 +45,7 @@ time.sleep(7)
 while not carreraTomada:
     try:
         buscar_y_clicar_texto("metro")
-        time.sleep(2)
+        time.sleep(0.5)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         break
