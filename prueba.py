@@ -14,10 +14,11 @@ def buscar_y_clicar_texto(texto):
     
     if elemento.exists:
         # Si el texto existe, hacer clic en él
-        elemento.click()
+        elemento.click(500,500)
         print(f"Se encontró y se hizo clic en el texto: {texto}")
     else:
         print(f"No se encontró el texto: {texto}")
+        elemento.click()
 
 #d = u2.connect()
 
