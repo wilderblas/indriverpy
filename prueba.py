@@ -36,10 +36,12 @@ time.sleep(5) """
     time.sleep(0.5) """
 
 
-while not carreraTomada:
+""" while not carreraTomada:
     try:
         buscar_y_clicar_texto("metro")
         time.sleep(2)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
-        break
+        break """
+d = u2.connect()
+print(d.dump_hierarchy())
