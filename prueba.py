@@ -39,6 +39,7 @@ time.sleep(5) """
     print(f"Clic simulado en ({x}, {y}) - intento {i+1}")
     time.sleep(0.5) """
 
+time.sleep(7)
 
 while not carreraTomada:
     try:
