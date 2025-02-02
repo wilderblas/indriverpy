@@ -46,4 +46,8 @@ time.sleep(5) """
 
 time.sleep(7)
 d = u2.connect()
-print(d.dump_hierarchy())
+hierarchy = d.dump_hierarchy()
+
+# Guardar en un archivo de texto
+with open('hierarchy.xml', 'w', encoding='utf-8') as file:
+    file.write(hierarchy)
