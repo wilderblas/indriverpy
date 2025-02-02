@@ -14,11 +14,11 @@ def buscar_y_clicar_texto(texto):
     
     if elemento.exists:
         # Si el texto existe, hacer clic en él
-        elemento.click(500,500)
-        print(f"Se encontró y se hizo clic en el texto: {texto}")
+        #elemento.click(500,500)
+        print(f"Se encontró el texto")
     else:
-        print(f"No se encontró el texto: {texto}")
-        elemento.click()
+        print(f"No se encontró el texto")
+        #elemento.click()
 
 #d = u2.connect()
 
@@ -39,7 +39,7 @@ time.sleep(5) """
 while not carreraTomada:
     try:
         buscar_y_clicar_texto("metro")
-        time.sleep(1)
+        time.sleep(2)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         break
