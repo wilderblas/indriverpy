@@ -38,7 +38,7 @@ time.sleep(5) """
 
 while not carreraTomada:
     try:
-        buscar_y_clicar_texto("metro")
+        buscar_y_clicar_texto("logro")
         time.sleep(2)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
