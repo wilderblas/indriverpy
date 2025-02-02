@@ -20,6 +20,7 @@ def buscar_y_clicar_texto(texto):
         print(f"No se encontró el texto")
         #elemento.click() """
     if d(textContains=texto).exists():
+        d.click()
         print("El texto fue encontrado en la pantalla.")
     else:
         print("El texto no fue encontrado.")
