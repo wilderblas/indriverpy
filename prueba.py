@@ -56,9 +56,9 @@ def buscar_y_clicar_texto(texto):
         sonido_thread.join()
         clic_thread.join()
         time.sleep(0.2)
-        print("El texto fue encontrado en la pantalla.")
+        #print("El texto fue encontrado en la pantalla.")
     else:
-        print("El texto no fue encontrado.")
+        #print("El texto no fue encontrado.")
 
 #d = u2.connect()
 
