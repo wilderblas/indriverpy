@@ -8,6 +8,8 @@ import threading
 carreraTomada = False
 # Conectar con el dispositivo (asegúrate de que tu dispositivo esté conectado y en modo depuración)
 
+d = u2.connect()  # Conecta al primer dispositivo disponible
+
 """ def tarea1(d):
     d.click(530,670)
 
