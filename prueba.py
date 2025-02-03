@@ -1,6 +1,6 @@
 import uiautomator2 as u2
 import time
-#import os
+import os
 #import threading
 
 #import subprocess
@@ -33,7 +33,7 @@ def buscar_y_clicar_texto(texto):
         #elemento.click() """
     if d(textContains=texto).exists():
         d.click(530,670)
-        #os.system("mpv sonido.mp3")
+        os.system("mpv sonido.mp3")
         time.sleep(0.2)
         print("El texto fue encontrado en la pantalla.")
     else:
