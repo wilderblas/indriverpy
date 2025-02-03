@@ -1,7 +1,7 @@
 import uiautomator2 as u2
 import time
 import os
-#import threading
+import threading
 
 #import subprocess
 
@@ -16,6 +16,10 @@ def tarea2():
 
 hilo1 = threading.Thread(target=tarea1)
 hilo2 = threading.Thread(target=tarea2) """
+
+# Función para reproducir el sonido
+def reproducir_sonido():
+    os.system("mpv sonido.mp3")
 
 def buscar_y_clicar_texto(texto):
     # Conectar al dispositivo
@@ -33,7 +37,8 @@ def buscar_y_clicar_texto(texto):
         #elemento.click() """
     if d(textContains=texto).exists():
         d.click(530,670)
-        os.system("mpv sonido.mp3")
+        sonido_thread = threading.Thread(target=reproducir_sonido)
+        sonido_thread.start()
         time.sleep(0.2)
         print("El texto fue encontrado en la pantalla.")
     else:
