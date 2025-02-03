@@ -1,10 +1,21 @@
 import uiautomator2 as u2
 import time
 import os
+import threading
+
 #import subprocess
 
 carreraTomada = False
 # Conectar con el dispositivo (asegúrate de que tu dispositivo esté conectado y en modo depuración)
+
+hilo1 = threading.Thread(target=tarea1)
+hilo2 = threading.Thread(target=tarea2)
+
+def tarea1(d):
+    d.click(530,670)
+
+def tarea2():
+    os.system("mpv sonido.mp3")
 
 def buscar_y_clicar_texto(texto):
     # Conectar al dispositivo
@@ -21,10 +32,14 @@ def buscar_y_clicar_texto(texto):
         print(f"No se encontró el texto")
         #elemento.click() """
     if d(textContains=texto).exists():
-        d.click(530,670)
-        os.system("mpv sonido.mp3")
+        #d.click(530,670)
+        #os.system("mpv sonido.mp3")
+        hilo1.start()
+        hilo2.start()
         time.sleep(0.2)
         print("El texto fue encontrado en la pantalla.")
+        hilo1.join()
+        hilo2.join()
     else:
         print("El texto no fue encontrado.")
 
@@ -42,6 +57,7 @@ time.sleep(5) """
     d.click(x, y)
     print(f"Clic simulado en ({x}, {y}) - intento {i+1}")
     time.sleep(0.5) """
+
 
 
 
