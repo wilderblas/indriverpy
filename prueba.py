@@ -1,5 +1,6 @@
 import uiautomator2 as u2
 import time
+import os
 #import subprocess
 
 carreraTomada = False
@@ -21,6 +22,7 @@ def buscar_y_clicar_texto(texto):
         #elemento.click() """
     if d(textContains=texto).exists():
         d.click(530,670)
+        os.system("mpv sonido.mp3")
         time.sleep(0.2)
         print("El texto fue encontrado en la pantalla.")
     else:
@@ -44,7 +46,7 @@ time.sleep(5) """
 
 
 
-""" time.sleep(7)
+time.sleep(7)
 
 while not carreraTomada:
     try:
@@ -52,15 +54,15 @@ while not carreraTomada:
         time.sleep(0.4)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
-        break """
+        break
 
 
 
 
-time.sleep(7)
+""" time.sleep(7)
 d = u2.connect()
 hierarchy = d.dump_hierarchy()
 
 # Guardar en un archivo de texto
 with open('SolicitudDViaje.xml', 'w', encoding='utf-8') as file:
-    file.write(hierarchy)
+    file.write(hierarchy) """
