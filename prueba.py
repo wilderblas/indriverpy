@@ -45,16 +45,16 @@ def buscar_y_clicar_texto(texto):
         #elemento.click() """
     if d(textContains=texto).exists():
         # Crear hilos para ambas acciones
-        clic_thread = threading.Thread(target=hacer_clic)
         sonido_thread = threading.Thread(target=reproducir_sonido)
+        clic_thread = threading.Thread(target=hacer_clic)
         
         # Iniciar ambos hilos
-        clic_thread.start()
         sonido_thread.start()
+        clic_thread.start()
         
         # Esperar a que ambos hilos terminen
-        clic_thread.join()
         sonido_thread.join()
+        clic_thread.join()
         time.sleep(0.2)
         print("El texto fue encontrado en la pantalla.")
     else:
