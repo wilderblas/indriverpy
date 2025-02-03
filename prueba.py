@@ -8,14 +8,14 @@ import threading
 carreraTomada = False
 # Conectar con el dispositivo (asegúrate de que tu dispositivo esté conectado y en modo depuración)
 
-hilo1 = threading.Thread(target=tarea1)
-hilo2 = threading.Thread(target=tarea2)
-
 def tarea1(d):
     d.click(530,670)
 
 def tarea2():
     os.system("mpv sonido.mp3")
+
+hilo1 = threading.Thread(target=tarea1)
+hilo2 = threading.Thread(target=tarea2)
 
 def buscar_y_clicar_texto(texto):
     # Conectar al dispositivo
