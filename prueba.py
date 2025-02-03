@@ -35,7 +35,7 @@ def buscar_y_clicar_texto(texto):
         d.click(530,670)
         #os.system("mpv sonido.mp3")
         time.sleep(0.2)
-        print("El texto fue encontrado en la pantalla."))
+        print("El texto fue encontrado en la pantalla.")
     else:
         print("El texto no fue encontrado.")
 
