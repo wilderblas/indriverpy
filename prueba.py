@@ -21,8 +21,8 @@ def buscar_y_clicar_texto(texto):
         print(f"No se encontró el texto")
         #elemento.click() """
     if d(textContains=texto).exists():
-        d.click(530,670)
         os.system("mpv sonido.mp3")
+        d.click(530,670)
         time.sleep(0.2)
         print("El texto fue encontrado en la pantalla.")
     else:
