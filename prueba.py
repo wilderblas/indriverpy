@@ -21,7 +21,7 @@ hilo2 = threading.Thread(target=tarea2) """
 
 # Función para hacer clic
 def hacer_clic():
-    d.click(530, 670)
+    d.click(530, 470)
     print("Clic realizado.")
 
 # Función para reproducir el sonido
