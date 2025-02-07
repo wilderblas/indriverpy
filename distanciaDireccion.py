@@ -1,25 +1,23 @@
-from geopy.geocoders import Nominatim
-from geopy.distance import geodesic
+import googlemaps
 
-def calcular_distancia(direccion1, direccion2):
-    geolocator = Nominatim(user_agent="geoapiExercises")
+def distancia_google_maps(direccion1, direccion2, api_key):
+    gmaps = googlemaps.Client(key=api_key)
     
-    # Obtener coordenadas de las direcciones
-    ubicacion1 = geolocator.geocode(direccion1)
-    ubicacion2 = geolocator.geocode(direccion2)
+    resultado = gmaps.distance_matrix(direccion1, direccion2, mode="driving")
+    distancia = resultado["rows"][0]["elements"][0]["distance"]["text"]
+    
+    return distancia
 
-    if ubicacion1 and ubicacion2:
-        coords1 = (ubicacion1.latitude, ubicacion1.longitude)
-        coords2 = (ubicacion2.latitude, ubicacion2.longitude)
-        
-        distancia = geodesic(coords1, coords2).km
-        return distancia
-    else:
-        return "No se pudo encontrar una de las direcciones."
+# Clave de API de Google Maps (debes generar una en Google Cloud)
+API_KEY = "AIzaSyCC4wcwBPCcqJvYyk5RiRPj_2J1kGzNrrs"
 
-# Ejemplo de uso
 direccion_origen = "Av. Hermanos Uceda Meza 638 (Urb las Quintanas Etapa 4)"
 direccion_destino = "Complejo deportivo CEP Nuestra Señora del Perpetuo Socorro"
 
-distancia_km = calcular_distancia(direccion_origen, direccion_destino)
-print(f"La distancia es aproximadamente {distancia_km:.2f} km")
+distancia_km = distancia_google_maps(direccion_origen, direccion_destino, API_KEY)
+print(f"La distancia por carretera es aproximadamente {distancia_km}")
+
+# Ejemplo de uso
+#direccion_origen = "Av. Hermanos Uceda Meza 638 (Urb las Quintanas Etapa 4)"
+#direccion_destino = "Complejo deportivo CEP Nuestra Señora del Perpetuo Socorro"
+
