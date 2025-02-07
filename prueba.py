@@ -57,7 +57,7 @@ def buscar_y_clicar_texto(texto):
         clic_thread.join()
         time.sleep(0.2)
     else:
-        d.swipe(500, 350, 500, 1100, duration=0.4)
+        d.swipe(500, 350, 500, 1100, duration=0.1)
 
         #print("El texto fue encontrado en la pantalla.")
     #else:
