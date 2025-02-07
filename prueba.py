@@ -56,6 +56,9 @@ def buscar_y_clicar_texto(texto):
         sonido_thread.join()
         clic_thread.join()
         time.sleep(0.2)
+    else:
+        d.swipe(500, 350, 500, 1100, duration=0.4)
+
         #print("El texto fue encontrado en la pantalla.")
     #else:
         #print("El texto no fue encontrado.")
@@ -83,8 +86,10 @@ time.sleep(7)
 
 while not carreraTomada:
     try:
-        buscar_y_clicar_texto("metro")
-        time.sleep(0.4)
+        if d(text="Solicitudes de viaje").exists():
+            print("Solicitudes de Viaje")
+            buscar_y_clicar_texto("metro")
+            time.sleep(0.4)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         break
