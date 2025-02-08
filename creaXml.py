@@ -7,5 +7,5 @@ d = u2.connect()
 hierarchy = d.dump_hierarchy()
 
 # Guardar en un archivo de texto
-with open('SolicitudDViaje6.xml', 'w', encoding='utf-8') as file:
+with open('SolicitudesDViajeLIBRE.xml', 'w', encoding='utf-8') as file:
     file.write(hierarchy)
