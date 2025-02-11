@@ -1,20 +1,29 @@
 import subprocess
 import xml.etree.ElementTree as ET
 import time
+import re
 
 def get_ui_hierarchy():
     # Ejecutar el comando adb para obtener el XML de la pantalla
     command = "adb exec-out uiautomator dump /dev/tty"
     result = subprocess.run(command, shell=True, capture_output=True, text=True)
-    
+
     # Verificar si el comando se ejecutó correctamente
     if result.returncode != 0:
         print("Error al obtener la jerarquía de la UI:", result.stderr)
         return None
-    
+
+    # Limpiar la salida eliminando cualquier texto antes y después de la etiqueta <hierarchy>
+    match = re.search(r"<hierarchy.*?</hierarchy>", result.stdout, re.DOTALL)
+    if match:
+        clean_xml = match.group(0)
+    else:
+        print("Error: No se encontró una estructura XML válida en la salida.")
+        return None
+
     # Parsear el XML
     try:
-        root = ET.fromstring(result.stdout)
+        root = ET.fromstring(clean_xml)
         return root
     except ET.ParseError as e:
         print("Error al parsear el XML:", e)
