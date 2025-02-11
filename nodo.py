@@ -1,5 +1,6 @@
 import subprocess
 import xml.etree.ElementTree as ET
+import time
 
 def get_ui_hierarchy():
     # Ejecutar el comando adb para obtener el XML de la pantalla
@@ -31,6 +32,7 @@ def extract_node(root):
     else:
         return "No se encontró el nodo especificado."
 
+time.sleep(8)
 # Obtener la jerarquía de la UI en tiempo real
 ui_root = get_ui_hierarchy()
 
