@@ -99,7 +99,10 @@ def buscar_y_clicar_texto(texto):
                             propuestaSol = float(extract_price(root).replace("S/ ",""))
                             print("Precio encontrado: "+str(propuestaSol))
                             if distancia_metros<6500:
-                                precioAceptado=round(duracion_minutos*0.66)
+                                if duracion_minutos < 7 and duracion_minutos > 5.20:
+                                    precioAceptado=6
+                                else:
+                                    precioAceptado=round(duracion_minutos*0.66)
                                 if propuestaSol>=precioAceptado:
                                     #click boton aceptado
                                     print("Se ACEPTA la propuesta del CIENTE")
