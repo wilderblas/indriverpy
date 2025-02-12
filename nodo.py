@@ -60,14 +60,24 @@ if ui_root:
         text_values = extract_text_values(node)
         
         # Imprimir los valores en el formato deseado
-        print(f"driver_common_textview_name = {text_values['sinet.startup.inDriver:id/driver_common_textview_name']}")
+        """ print(f"driver_common_textview_name = {text_values['sinet.startup.inDriver:id/driver_common_textview_name']}")
         print(f"driver_common_textview_rating = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating']}")
         print(f"driver_common_textview_rating_rides_done = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating_rides_done']}")
         print(f"item_order_textview_posted_time_ago = {text_values['sinet.startup.inDriver:id/item_order_textview_posted_time_ago']}")
         print(f"order_info_textview_from_address = {text_values['sinet.startup.inDriver:id/order_info_textview_from_address']}")
         print(f"order_info_textview_to_addresses = {text_values['sinet.startup.inDriver:id/order_info_textview_to_addresses']}")
         print(f"order_info_textview_price = {text_values['sinet.startup.inDriver:id/order_info_textview_price']}")
-        print(f"order_info_textview_distance = {text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
+        print(f"order_info_textview_distance = {text_values['sinet.startup.inDriver:id/order_info_textview_distance']}") """
+
+        # Imprimir los valores en el formato deseado
+        print(f"Nombre = {text_values['sinet.startup.inDriver:id/driver_common_textview_name']}")
+        print(f"Rating = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating']}")
+        print(f"#viajes = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating_rides_done']}")
+        print(f"tiempo de Propuesta = {text_values['sinet.startup.inDriver:id/item_order_textview_posted_time_ago']}")
+        print(f"Direccion A = {text_values['sinet.startup.inDriver:id/order_info_textview_from_address']}")
+        print(f"Direccion B = {text_values['sinet.startup.inDriver:id/order_info_textview_to_addresses']}")
+        print(f"Precio = {text_values['sinet.startup.inDriver:id/order_info_textview_price']}")
+        print(f"Distancia = {text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
     else:
         print("No se encontró el nodo especificado.")
 else:
