@@ -22,13 +22,53 @@ def extract_node(root):
     target_node = root.find(".//node[@resource-id='sinet.startup.inDriver:id/item_order_container']")
     
     if target_node is not None:
-        return ET.tostring(target_node, encoding='unicode')
+        return target_node
     else:
-        return "No se encontró el nodo especificado."
+        return None
+
+def extract_text_values(node):
+    # Diccionario para almacenar los valores de los resource-id
+    values = {}
+
+    # Buscar los nodos específicos y extraer sus valores de texto
+    resource_ids = [
+        "sinet.startup.inDriver:id/driver_common_textview_name",
+        "sinet.startup.inDriver:id/driver_common_textview_rating",
+        "sinet.startup.inDriver:id/driver_common_textview_rating_rides_done",
+        "sinet.startup.inDriver:id/item_order_textview_posted_time_ago",
+        "sinet.startup.inDriver:id/order_info_textview_from_address",
+        "sinet.startup.inDriver:id/order_info_textview_to_addresses",
+        "sinet.startup.inDriver:id/order_info_textview_price",
+        "sinet.startup.inDriver:id/order_info_textview_distance"
+    ]
+
+    for resource_id in resource_ids:
+        element = node.find(f".//node[@resource-id='{resource_id}']")
+        if element is not None:
+            values[resource_id] = element.get("text", "").strip()
+        else:
+            values[resource_id] = "No encontrado"
+
+    return values
 
 time.sleep(7)  # Espera antes de capturar la UI
 
 ui_root = get_ui_hierarchy()
 if ui_root:
-    node_xml = extract_node(ui_root)
-    print(node_xml)
+    node = extract_node(ui_root)
+    if node:
+        text_values = extract_text_values(node)
+        
+        # Imprimir los valores en el formato deseado
+        print(f"driver_common_textview_name = {text_values['sinet.startup.inDriver:id/driver_common_textview_name']}")
+        print(f"driver_common_textview_rating = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating']}")
+        print(f"driver_common_textview_rating_rides_done = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating_rides_done']}")
+        print(f"item_order_textview_posted_time_ago = {text_values['sinet.startup.inDriver:id/item_order_textview_posted_time_ago']}")
+        print(f"order_info_textview_from_address = {text_values['sinet.startup.inDriver:id/order_info_textview_from_address']}")
+        print(f"order_info_textview_to_addresses = {text_values['sinet.startup.inDriver:id/order_info_textview_to_addresses']}")
+        print(f"order_info_textview_price = {text_values['sinet.startup.inDriver:id/order_info_textview_price']}")
+        print(f"order_info_textview_distance = {text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
+    else:
+        print("No se encontró el nodo especificado.")
+else:
+    print("No se pudo obtener la jerarquía de la UI.")
