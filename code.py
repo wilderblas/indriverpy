@@ -2,6 +2,8 @@ import uiautomator2 as u2
 import xml.etree.ElementTree as ET
 import time
 import googlemaps
+#import math
+import os
 
 nombre=""
 rating=0.0
@@ -10,6 +12,8 @@ tPropuestaSec=0
 precio=0.0
 distanciaA=0
 distanciaB=0
+propuestaSol=0.0
+precioAceptado=0
 
 API_KEY = "AIzaSyCC4wcwBPCcqJvYyk5RiRPj_2J1kGzNrrs"
 # Inicializar el cliente de Google Maps
@@ -81,15 +85,53 @@ def buscar_y_clicar_texto(texto):
         print("precio="+str(precio))
         print("distanciaA="+str(distanciaA))
         print("distanciaB="+str(distancia_metros))
-        time.sleep(30)
-        """ while True:
+        time.sleep(0.3)
+        while True:
             try:
                 d = u2.connect()
                 if d(textContains="Ofrece tu tarifa").exists():
-
+                    if distancia_metros<1000:
+                        print("Aceptar la propuesta la que sea")
+                    else:
+                        root = get_ui_hierarchy()
+                        if root is not None:
+                            propuestaSol = float(extract_price(root).replace("S/ ",""))
+                            print("Precio encontrado: "+str(propuestaSol))
+                            if distancia_metros<6500:
+                                precioAceptado=round(duracion_minutos*0.66)
+                                if propuestaSol>=precioAceptado:
+                                    #click boton aceptado
+                                    print("Se ACEPTA la propuesta del CIENTE")
+                                else:
+                                    d.click(976,2049)
+                                    time.sleep(0.2)
+                                    d.click(976,2049)
+                                    time.sleep(0.1)
+                                    enviar_texto_por_adb(str(precioAceptado))
+                                    print("Se presiona enter")
+                            else:
+                                if distancia_metros<8000:
+                                    precioAceptado=round(duracion_minutos*0.64)
+                                    if propuestaSol>=precioAceptado:
+                                        #clicl boton Aceptado
+                                        print("Se ACEPTA la propuesta del CIENTE")
+                                    else:
+                                        d.click(976,2049)
+                                        time.sleep(0.2)
+                                        d.click(976,2049)
+                                        time.sleep(0.1)
+                                        enviar_texto_por_adb(str(precioAceptado))
+                                        print("Se presiona enter")
+                                else:
+                                    #back
+                                    print("Saldre del bucle porque la carrera es mayor a 8 Km")
+                                    break
+                            #precio=float((f"{text_values['sinet.startup.inDriver:id/order_info_textview_price']}").replace("S/ ",""))
+                        else:
+                            print("No se pudo obtener la jerarquía de la UI.")
             except Exception as e:
                 print(f"Ocurrió un error: {e}")
-                break """
+                break
 
 def get_ui_hierarchy():
     d = u2.connect()
@@ -140,6 +182,15 @@ def extract_text_values(node):
 
     return values
 
+def extract_price(root):
+    # Buscar el nodo específico que contiene el precio
+    price_node = root.find(".//node[@resource-id='sinet.startup.inDriver:id/info_textview_price']")
+    
+    if price_node is not None:
+        return price_node.get("text", "").strip()
+    else:
+        return "No encontrado"
+
 def convertir_a_segundos(texto):
     """Convierte un string de tiempo en segundos."""
     if texto == "Justo ahora":
@@ -167,6 +218,9 @@ def extraer_metros(texto):
     
     return None  # Si no contiene 'metro' o 'km', retorna None
 
+def enviar_texto_por_adb(texto):
+    comando = f"adb shell input text \"{texto}\""
+    os.system(comando)
 
 time.sleep(7)
 
