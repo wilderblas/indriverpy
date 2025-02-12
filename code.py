@@ -7,7 +7,6 @@ d=u2.connect()
 def buscar_y_clicar_texto(texto):
     d = u2.connect()
     if d(textContains=texto).exists():
-        d.click(530, 470)
         ui_root = get_ui_hierarchy()
         if ui_root:
             node = extract_node(ui_root)
@@ -37,6 +36,7 @@ def buscar_y_clicar_texto(texto):
                 print("No se encontró el nodo especificado.")
         else:
             print("No se pudo obtener la jerarquía de la UI.")
+        d.click(530, 470)
         time.sleep(0.1)
 
 def get_ui_hierarchy():
