@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import time
 import googlemaps
 #import math
+import re
 import os
 
 nombre=""
