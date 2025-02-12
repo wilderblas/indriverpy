@@ -1,6 +1,19 @@
 import uiautomator2 as u2
 import xml.etree.ElementTree as ET
 import time
+import googlemaps
+
+nombre=""
+rating=0.0
+nviajes=0
+tPropuestaSec=0
+precio=0.0
+distanciaA=0
+distanciaB=0
+
+API_KEY = "AIzaSyCC4wcwBPCcqJvYyk5RiRPj_2J1kGzNrrs"
+# Inicializar el cliente de Google Maps
+gmaps = googlemaps.Client(key=API_KEY)
 
 d=u2.connect()
 
@@ -25,11 +38,31 @@ def buscar_y_clicar_texto(texto):
 
                 # Imprimir los valores en el formato deseado
                 print(f"Nombre = {text_values['sinet.startup.inDriver:id/driver_common_textview_name']}")
+                nombre=f"{text_values['sinet.startup.inDriver:id/driver_common_textview_name']}"
                 print(f"Rating = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating']}")
+                rating=float(f"{text_values['sinet.startup.inDriver:id/driver_common_textview_rating']}")
                 print(f"#viajes = {text_values['sinet.startup.inDriver:id/driver_common_textview_rating_rides_done']}")
+                nviajes=int((f"{text_values['sinet.startup.inDriver:id/driver_common_textview_rating_rides_done']}").strip("()"))
                 print(f"tiempo de Propuesta = {text_values['sinet.startup.inDriver:id/item_order_textview_posted_time_ago']}")
-                print(f"Direccion A = {text_values['sinet.startup.inDriver:id/order_info_textview_from_address']}")
-                print(f"Direccion B = {text_values['sinet.startup.inDriver:id/order_info_textview_to_addresses']}")
+                tPropuestaSec=convertir_a_segundos(f"{text_values['sinet.startup.inDriver:id/item_order_textview_posted_time_ago']}")
+                # Direcciones en Trujillo, La Libertad, Perú
+                origen = f"{text_values['sinet.startup.inDriver:id/order_info_textview_from_address']}, Trujillo, La Libertad, Perú"
+                destino = f"{text_values['sinet.startup.inDriver:id/order_info_textview_to_addresses']}, Trujillo, La Libertad, Perú"
+                # Obtener la distancia con la API Distance Matrix
+                resultado = gmaps.distance_matrix(origen, destino, mode="driving")
+                #print(f"Direccion A = {text_values['sinet.startup.inDriver:id/order_info_textview_from_address']}")
+                #print(f"Direccion B = {text_values['sinet.startup.inDriver:id/order_info_textview_to_addresses']}")
+                if resultado["rows"][0]["elements"][0]["status"] == "OK":
+                    distancia_metros = resultado["rows"][0]["elements"][0]["distance"]["value"]
+                    distancia_km = distancia_metros / 1000  # Convertir a kilómetros
+
+                    duracion_segundos = resultado["rows"][0]["elements"][0]["duration"]["value"]
+                    duracion_minutos = duracion_segundos / 60  # Convertir a minutos
+                    
+                    print(f"La distancia entre {origen} y {destino} es {distancia_km:.2f} km")
+                    print(f"El tiempo estimado de viaje en auto es de {duracion_minutos:.2f} minutos")
+                else:
+                    print("No se pudo calcular la distancia o el tiempo de viaje.")
                 print(f"Precio = {text_values['sinet.startup.inDriver:id/order_info_textview_price']}")
                 print(f"Distancia = {text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
             else:
@@ -38,6 +71,15 @@ def buscar_y_clicar_texto(texto):
             print("No se pudo obtener la jerarquía de la UI.")
         d.click(530, 470)
         time.sleep(0.1)
+        time.sleep(30)
+        """ while True:
+            try:
+                d = u2.connect()
+                if d(textContains="Ofrece tu tarifa").exists():
+
+            except Exception as e:
+                print(f"Ocurrió un error: {e}")
+                break """
 
 def get_ui_hierarchy():
     d = u2.connect()
@@ -87,6 +129,22 @@ def extract_text_values(node):
             values[resource_id] = "No encontrado"
 
     return values
+
+def convertir_a_segundos(texto):
+    """Convierte un string de tiempo en segundos."""
+    if texto == "Justo ahora":
+        return 0  # Si es "Justo ahora", retorna 0
+
+    match = re.match(r"(\d+)\s*(\w+)\.", texto)  # Extraer número y unidad
+    if match:
+        valor, unidad = int(match.group(1)), match.group(2)
+        
+        if "seg" in unidad:
+            return valor  # Si es segundos, retorna tal cual
+        elif "min" in unidad:
+            return valor * 60  # Si es minutos, multiplica por 60
+
+    return None
 
 time.sleep(7)
 
