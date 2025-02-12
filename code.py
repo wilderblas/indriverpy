@@ -64,7 +64,7 @@ def buscar_y_clicar_texto(texto):
                 else:
                     print("No se pudo calcular la distancia o el tiempo de viaje.")
                 print(f"Precio = {text_values['sinet.startup.inDriver:id/order_info_textview_price']}")
-                precio=float((f"{text_values['sinet.startup.inDriver:id/order_info_textview_price']}").replace("S/ ",""))
+                precio=float((f"{text_values['sinet.startup.inDriver:id/order_info_textview_price']}").replace("S/ ",""))
                 print(f"Distancia = {text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
                 distanciaA=extraer_metros(f"{text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
             else:
