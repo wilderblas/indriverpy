@@ -19,7 +19,7 @@ def get_ui_hierarchy():
 
 def extract_node(root):
     # Buscar el nodo específico
-    target_node = root.find(".//node[@index='0'][@resource-id='sinet.startup.inDriver:id/item_order_container']")
+    target_node = root.find(".//node[@resource-id='sinet.startup.inDriver:id/item_order_container']")
     
     if target_node is not None:
         return ET.tostring(target_node, encoding='unicode')
