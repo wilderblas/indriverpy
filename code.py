@@ -64,13 +64,23 @@ def buscar_y_clicar_texto(texto):
                 else:
                     print("No se pudo calcular la distancia o el tiempo de viaje.")
                 print(f"Precio = {text_values['sinet.startup.inDriver:id/order_info_textview_price']}")
+                precio=float((f"{text_values['sinet.startup.inDriver:id/order_info_textview_price']}").replace("S/ ",""))
                 print(f"Distancia = {text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
+                distanciaA=extraer_metros(f"{text_values['sinet.startup.inDriver:id/order_info_textview_distance']}")
             else:
                 print("No se encontró el nodo especificado.")
         else:
             print("No se pudo obtener la jerarquía de la UI.")
         d.click(530, 470)
         time.sleep(0.1)
+        print("Variables")
+        print("nombre="+nombre)
+        print("rating="+str(rating))
+        print("nviajes="+str(nviajes))
+        print("tPropuestaSec="+str(tPropuestaSec))
+        print("precio="+str(precio))
+        print("distanciaA="+str(distanciaA))
+        print("distanciaB="+str(distancia_metros))
         time.sleep(30)
         """ while True:
             try:
@@ -145,6 +155,18 @@ def convertir_a_segundos(texto):
             return valor * 60  # Si es minutos, multiplica por 60
 
     return None
+
+def extraer_metros(texto):
+    """Elimina '~', convierte 'km' a metros y devuelve un entero."""
+    texto = texto.replace("~", "").replace(",", ".")  # Elimina '~' y cambia ',' por '.'
+    
+    if "km" in texto:
+        return int(float(texto.replace(" km", "")) * 1000)  # Convierte km a metros
+    elif "metro" in texto:
+        return int(float(texto.replace(" metro", "")))  # Mantiene metros
+    
+    return None  # Si no contiene 'metro' o 'km', retorna None
+
 
 time.sleep(7)
 
