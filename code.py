@@ -102,6 +102,7 @@ def buscar_y_clicar_texto(texto):
                                 if propuestaSol>=precioAceptado:
                                     #click boton aceptado
                                     print("Se ACEPTA la propuesta del CIENTE")
+                                    time.sleep(10)
                                 else:
                                     d.click(976,2049)
                                     time.sleep(0.2)
@@ -109,12 +110,14 @@ def buscar_y_clicar_texto(texto):
                                     time.sleep(0.1)
                                     enviar_texto_por_adb(str(precioAceptado))
                                     print("Se presiona enter")
+                                    time.sleep(10)
                             else:
                                 if distancia_metros<8000:
                                     precioAceptado=round(duracion_minutos*0.64)
                                     if propuestaSol>=precioAceptado:
                                         #clicl boton Aceptado
                                         print("Se ACEPTA la propuesta del CIENTE")
+                                        time.sleep(10)
                                     else:
                                         d.click(976,2049)
                                         time.sleep(0.2)
@@ -122,6 +125,7 @@ def buscar_y_clicar_texto(texto):
                                         time.sleep(0.1)
                                         enviar_texto_por_adb(str(precioAceptado))
                                         print("Se presiona enter")
+                                        time.sleep(10)
                                 else:
                                     #back
                                     print("Saldre del bucle porque la carrera es mayor a 8 Km")
