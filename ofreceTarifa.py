@@ -23,7 +23,7 @@ while True:
         d = u2.connect()
         if d(textContains="Ofrece tu tarifa").exists():
             os.system("mpv sonido.mp3")
-            d.click(715.1298)
+            d.click(715,1298)
             while True:
               key = leer_tecla().upper()  # Captura la tecla y la convierte a mayúscula
 
