@@ -1,38 +1,29 @@
-import uiautomator2 as u2
-import sys
-import tty
-import termios
+import subprocess
 import time
 
 time.sleep(8)
 
-def leer_tecla():
-    """Lee una sola tecla sin necesidad de presionar Enter."""
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(fd)
-        tecla = sys.stdin.read(1)  # Lee un solo carácter
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return tecla
+print("Esperando entrada del teclado... Presiona 'Q' para salir.")
 
-print("Presiona W, A, S, D o X para imprimir un mensaje. Presiona 'Q' para salir.")
+# Ejecuta el comando `getevent -l` para capturar eventos del teclado
+process = subprocess.Popen(["adb", "shell", "getevent -l"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-while True:
-    key = leer_tecla().upper()  # Captura la tecla y la convierte a mayúscula
-
-    if key == "W":
-        print("Aceptar")
-    elif key == "A":
-        print("Opcion1")
-    elif key == "S":
-        print("Opcion2")
-    elif key == "D":
-        print("Opcion3")
-    elif key == "X":
-        print("Cerrar")
-    elif key == "Q":  # Presionar "Q" para salir
-        print("Saliendo...")
-        break
-
+try:
+    for line in process.stdout:
+        if "KEY_W" in line:
+            print("Aceptar")
+        elif "KEY_A" in line:
+            print("Opcion1")
+        elif "KEY_S" in line:
+            print("Opcion2")
+        elif "KEY_D" in line:
+            print("Opcion3")
+        elif "KEY_X" in line:
+            print("Cerrar")
+        elif "KEY_Q" in line:
+            print("Saliendo...")
+            process.terminate()
+            exit(0)
+except KeyboardInterrupt:
+    print("Saliendo...")
+    process.terminate()
