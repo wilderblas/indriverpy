@@ -7,16 +7,20 @@ import os
 #import threading
 
 #carreraTomada = False
-def leer_tecla():
-    """Lee una sola tecla sin necesidad de presionar Enter."""
+def leer_tecla(timeout=7):
+    """Lee una sola tecla sin necesidad de presionar Enter, con un tiempo de espera."""
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
         tty.setraw(fd)
-        tecla = sys.stdin.read(1)  # Lee un solo carácter
+        # Espera hasta `timeout` segundos por la entrada del usuario
+        rlist, _, _ = select.select([sys.stdin], [], [], timeout)
+        if rlist:
+            return sys.stdin.read(1).upper()  # Captura un solo carácter y lo convierte a mayúscula
+        else:
+            return None  # Si no hay entrada, devuelve None
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return tecla
 
 while True:
     try:
@@ -25,7 +29,7 @@ while True:
             os.system("mpv sonido.mp3")
             d.click(715,1298)
             
-            key = leer_tecla().upper()  # Captura la tecla y la convierte a mayúscula
+            key = leer_tecla(timeout=7)  # Espera 7 segundos por una tecla
 
             if key == "W":
                 print("Aceptar")
