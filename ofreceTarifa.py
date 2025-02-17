@@ -8,7 +8,7 @@ import select
 #import threading
 
 #carreraTomada = False
-def leer_tecla(timeout=7):
+def leer_tecla(timeout=5):
     """Lee una sola tecla sin necesidad de presionar Enter, con un tiempo de espera."""
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
@@ -31,19 +31,19 @@ while True:
             d.click(715,1298)
             key = leer_tecla(timeout=7)  # Espera 7 segundos por una tecla
             if key == "W":
-                print("Aceptar")
+                d.click(532,1743)
                 #break
             elif key == "A":
-                print("Opcion1")
+                d.click(182,2042)
                 #break
             elif key == "S":
-                print("Opcion2")
+                d.click(541,2046)
                 #break
             elif key == "D":
-                print("Opcion3")
+                d.click(733,2047)
                 #break
             elif key == "X":
-                print("Cerrar")
+                d.click(545,2230)
                 #break
             elif key == "Q":  # Presionar "Q" para salir
                 print("Saliendo...")
