@@ -1,3 +1,4 @@
+import uiautomator2 as u2
 import sys
 import tty
 import termios
