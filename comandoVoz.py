@@ -1,28 +1,37 @@
-import keyboard
-import uiautomator2 as u2
+import sys
+import tty
+import termios
 import time
-import os
 
 time.sleep(8)
 
-print("Presiona W, A, S, D o X para ejecutar una acción. Presiona 'Esc' para salir.")
+def leer_tecla():
+    """Lee una sola tecla sin necesidad de presionar Enter."""
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(fd)
+        tecla = sys.stdin.read(1)  # Lee un solo carácter
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return tecla
 
-# Mapeo de teclas a acciones
-acciones = {
-    "W": print("Aceptar"),
-    "A": print("Opcion1"),
-    "S": print("Opcion2"),
-    "D": print("Opcion3"),
-    "X": print("Cerrar")
-}
+print("Presiona W, A, S, D o X para imprimir un mensaje. Presiona 'Q' para salir.")
 
 while True:
-    event = keyboard.read_event()  # Espera a que se presione una tecla
-    if event.event_type == keyboard.KEY_DOWN:  # Solo detecta cuando la tecla se presiona
-        key = event.name.upper()  # Convierte la tecla a mayúscula
+    key = leer_tecla().upper()  # Captura la tecla y la convierte a mayúscula
 
-        if key in acciones:
-            acciones[key]  # Imprime la acción correspondiente
-        elif key == "ESC":  # Si presiona "Escape", sale del programa
-            print("Saliendo...")
-            break
+    if key == "W":
+        print("Aceptar")
+    elif key == "A":
+        print("Opcion1")
+    elif key == "S":
+        print("Opcion2")
+    elif key == "D":
+        print("Opcion3")
+    elif key == "X":
+        print("Cerrar")
+    elif key == "Q":  # Presionar "Q" para salir
+        print("Saliendo...")
+        break
+
