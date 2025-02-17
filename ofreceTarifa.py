@@ -29,17 +29,22 @@ while True:
 
               if key == "W":
                   print("Aceptar")
+                  break
               elif key == "A":
                   print("Opcion1")
+                  break
               elif key == "S":
                   print("Opcion2")
+                  break
               elif key == "D":
                   print("Opcion3")
+                  break
               elif key == "X":
                   print("Cerrar")
+                  break
               elif key == "Q":  # Presionar "Q" para salir
                   print("Saliendo...")
-              break
+                  break
             time.sleep(1)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
