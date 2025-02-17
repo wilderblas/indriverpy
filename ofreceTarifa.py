@@ -24,28 +24,28 @@ while True:
         if d(textContains="Ofrece tu tarifa").exists():
             os.system("mpv sonido.mp3")
             d.click(715,1298)
-            while True:
-              key = leer_tecla().upper()  # Captura la tecla y la convierte a mayúscula
+            
+            key = leer_tecla().upper()  # Captura la tecla y la convierte a mayúscula
 
-              if key == "W":
-                  print("Aceptar")
-                  break
-              elif key == "A":
-                  print("Opcion1")
-                  break
-              elif key == "S":
-                  print("Opcion2")
-                  break
-              elif key == "D":
-                  print("Opcion3")
-                  break
-              elif key == "X":
-                  print("Cerrar")
-                  break
-              elif key == "Q":  # Presionar "Q" para salir
-                  print("Saliendo...")
-                  break
-            time.sleep(1)
+            if key == "W":
+                print("Aceptar")
+                #break
+            elif key == "A":
+                print("Opcion1")
+                #break
+            elif key == "S":
+                print("Opcion2")
+                #break
+            elif key == "D":
+                print("Opcion3")
+                #break
+            elif key == "X":
+                print("Cerrar")
+                #break
+            elif key == "Q":  # Presionar "Q" para salir
+                print("Saliendo...")
+                #break
+            time.sleep(3)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         break
