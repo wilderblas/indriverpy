@@ -8,7 +8,7 @@ import select
 #import threading
 
 #carreraTomada = False
-def leer_tecla(timeout=5):
+def leer_tecla(timeout=3):
     """Lee una sola tecla sin necesidad de presionar Enter, con un tiempo de espera."""
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
@@ -27,9 +27,9 @@ while True:
     try:
         d = u2.connect()
         if d(textContains="Ofrece tu tarifa").exists():
-            os.system("mpv sonido.mp3")
+            #os.system("mpv sonido.mp3")
             d.click(715,1298)
-            key = leer_tecla(timeout=7)  # Espera 7 segundos por una tecla
+            key = leer_tecla(timeout=3)  # Espera 7 segundos por una tecla
             if key == "W":
                 d.click(532,1743)
                 #break
@@ -48,7 +48,7 @@ while True:
             elif key == "Q":  # Presionar "Q" para salir
                 print("Saliendo...")
                 #break
-            time.sleep(3)
+            time.sleep(1)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         break
