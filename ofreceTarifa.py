@@ -4,6 +4,7 @@ import sys
 import tty
 import termios
 import os
+import select
 #import threading
 
 #carreraTomada = False
@@ -28,9 +29,7 @@ while True:
         if d(textContains="Ofrece tu tarifa").exists():
             os.system("mpv sonido.mp3")
             d.click(715,1298)
-            
             key = leer_tecla(timeout=7)  # Espera 7 segundos por una tecla
-
             if key == "W":
                 print("Aceptar")
                 #break
