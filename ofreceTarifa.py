@@ -36,10 +36,9 @@ while True:
                   print("Opcion3")
               elif key == "X":
                   print("Cerrar")
-                  break
               elif key == "Q":  # Presionar "Q" para salir
                   print("Saliendo...")
-                  break
+              break
             time.sleep(1)
     except Exception as e:
         print(f"Ocurrió un error: {e}")
